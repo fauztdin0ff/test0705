@@ -241,42 +241,23 @@ if (dropZone && fileInput && progressThumb && progressBox && progressTitle) {
 /*------------------------------
 Check timer
 ---------------------------*/
-function startTimer(durationSeconds = 118) {
+function startProgress(durationSeconds = 118) {
    const timerElement = document.getElementById("checkTimer");
-
-   if (!timerElement) {
-      return;
-   }
-
-   let remainingTime = durationSeconds;
-
-   const interval = setInterval(() => {
-      const minutes = String(Math.floor(remainingTime / 60)).padStart(2, "0");
-      const seconds = String(remainingTime % 60).padStart(2, "0");
-      timerElement.textContent = `${minutes}:${seconds}`;
-
-      if (remainingTime <= 0) {
-         clearInterval(interval);
-      }
-
-      remainingTime--;
-   }, 1000);
-}
-
-function startProgressBar(durationMs = 118000) {
    const progressThumb = document.querySelector(".check-popup__progress-thumb");
 
-   if (!progressThumb) {
-      return;
-   }
+   if (!timerElement || !progressThumb) return;
 
    const startTime = performance.now();
-   const endTime = startTime + durationMs;
+   const endTime = startTime + durationSeconds * 1000;
 
    function animate() {
       const now = performance.now();
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / durationMs, 1);
+      const remaining = Math.max((endTime - now) / 1000, 0);
+      const progress = Math.min((now - startTime) / (durationSeconds * 1000), 1);
+
+      const minutes = String(Math.floor(remaining / 60)).padStart(2, "0");
+      const seconds = String(Math.floor(remaining % 60)).padStart(2, "0");
+      timerElement.textContent = `${minutes}:${seconds}`;
 
       progressThumb.style.width = `${progress * 100}%`;
 
@@ -289,11 +270,7 @@ function startProgressBar(durationMs = 118000) {
 }
 
 // Запуск
-window.addEventListener('load', function () {
-   startTimer();
-   startProgressBar();
-});
-
+window.addEventListener("load", () => startProgress());
 
 })();
 
