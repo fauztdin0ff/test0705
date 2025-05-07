@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="css/style.min.css?_v=20250506230622">
+   <title>Главная</title>
+</head>
+
+<body>
+   <div class="upload">
+      <label class="upload__box" id="dropZone">
+         <p class="upload__att">Перенесите файл или нажмите на кнопку</p>
+         <div class="upload__button">
+            <img src="img/icons/upload.svg" alt=""> Загрузить договор
+            <input type="file" id="fileInput" accept=".docx, .png, .jpg, .jpeg">
+         </div>
+         <p class="upload__att">Поддерживаются форматы: .docx, .png, .jpg/jpeg</p>
+      </label>
+   </div>
+   <div class="upload__popup">
+      <div class="upload__progress">
+         <p class="upload__progress-title">Загрузка...</p>
+         <div class="upload__progress-bar">
+            <span class="upload__progress-thumb" id="progressThumb"></span>
+         </div>
+      </div>
+   </div>
+   <script src="js/app.js?_v=20250506230622"></script>
+</body>
+
+</html>
